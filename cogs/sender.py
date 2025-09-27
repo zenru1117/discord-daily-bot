@@ -46,7 +46,7 @@ class Sender(commands.Cog):
         images = [f for f in os.listdir(self.storage_dir) if f.lower().endswith((".png", ".jpg", ".jpeg", ".gif"))]
         if not images: return
 
-        select_history: deque[str] = self.storage.load_history()
+        select_history: deque[str] = self.storage.get_history()
         candidate_images = [img for img in images if img not in select_history]
         if not candidate_images:
             log.info("All images were recently used. Ignoring history and reselecting.")

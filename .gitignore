@@ -1,6 +1,9 @@
 logs/
 storage/
 
+.daily_image.json
+.history.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

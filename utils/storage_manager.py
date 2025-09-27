@@ -15,7 +15,7 @@ class StorageManager:
         self.daily_image_path=daily_image_path
         self.max_history_size=max_history_size
     
-    def load_history(self) -> deque[str]:
+    def get_history(self) -> deque[str]:
         try:
             with open(self.history_path, "r", encoding="utf-8") as f:
                 history_list: list[str] = json.load(f)
@@ -30,7 +30,7 @@ class StorageManager:
             json.dump(list(history), f, ensure_ascii=False, indent=2)
         log.info(f"Saved current history to '{self.history_path}'.")
     
-    def load_daily_image(self) -> DailyImage | None:
+    def get_daily_image(self) -> DailyImage | None:
         try:
             with open(self.daily_image_path, "r", encoding="utf-8") as f:
                 daily_image: DailyImage = json.load(f)
