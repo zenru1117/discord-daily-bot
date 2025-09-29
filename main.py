@@ -1,8 +1,9 @@
+import aiohttp
 import os
 import asyncio
 from pathlib import Path
 
-import uvloop
+# import uvloop
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -13,7 +14,7 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 TEST_GUILD_ID = os.getenv("TEST_GUILD_ID")
 
-asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+# asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 log = setup_logging("./logs", "botlog.log")
 
@@ -51,6 +52,9 @@ class DiscordDailyBot(commands.Bot):
     async def on_ready(self) -> None:
         if self.user:
             log.info(f"Logged in {self.user.name} (ID: {self.user.id})")
+
+    async def close(self):
+        return await super().close()
 
 def main() -> None:
     bot = DiscordDailyBot()
