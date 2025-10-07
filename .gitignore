@@ -1,8 +1,8 @@
 logs/
 storage/
 
-.daily_image.json
-.history.json
+daily_image.json
+history.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

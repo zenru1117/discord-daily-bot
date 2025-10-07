@@ -1,9 +1,9 @@
-import aiohttp
 import os
 import asyncio
+from typing import Final, cast
 from pathlib import Path
 
-# import uvloop
+import uvloop
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -11,12 +11,14 @@ from dotenv import load_dotenv
 from utils.logger import setup_logging
 
 load_dotenv()
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 TEST_GUILD_ID = os.getenv("TEST_GUILD_ID")
+BOT_TOKEN: Final[str] = cast(str, os.getenv("BOT_TOKEN"))
+if BOT_TOKEN is None:
+    raise ValueError("BOT_TOKEN is None.")
 
-# asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
-log = setup_logging("./logs", "botlog.log")
+log = setup_logging(__name__, "./logs", "discord-daily-bot.log")
 
 class DiscordDailyBot(commands.Bot):
     def __init__(self) -> None:

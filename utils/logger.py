@@ -2,7 +2,7 @@ import os
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
-def setup_logging(log_dir: str, log_file: str, level: int = logging.INFO) -> logging.Logger:
+def setup_logging(name: str, log_dir: str, log_file: str, level: int = logging.INFO) -> logging.Logger:
     os.makedirs(log_dir, exist_ok=True)
     log_path = os.path.join(log_dir, log_file)
 
@@ -23,4 +23,4 @@ def setup_logging(log_dir: str, log_file: str, level: int = logging.INFO) -> log
     logging.basicConfig(level=level, handlers=[file_handler, stream_handler])
     logging.getLogger("discord.http").setLevel(logging.INFO)
 
-    return logging.getLogger(__name__)
+    return logging.getLogger(name)
